@@ -19,6 +19,29 @@
       var canvas = document.getElementById("gamecanvas");
       // Get a 2D context for the canvas.
       var ctx = canvas.getContext("2d");  
+        
+        
+        // An object for the ball.
+      var ball = {
+        position: {x: 200, y: 10}
+        , radius: 3
+        , velocity: {x: 3, y: 0}
+	, acceleration: {x: 0, y: 0.1}
+      }
+      
+      var player1 = {
+        x: 0
+        , y: 0
+        , xy: 30
+        , yx: 100
+      }
+      
+      var player2 = {
+        x: 950
+        , y: 300
+        , xy: 30
+        , yx: 100
+      }
       
     </script>
   </body>
