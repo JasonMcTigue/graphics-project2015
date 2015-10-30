@@ -23,10 +23,9 @@
         
         // An object for the ball.
       var ball = {
-        position: {x: 200, y: 20}
+        position: {x: 200, y: 10}
         , radius: 3
-        , velocity: {x: 3, y: 0}
-	, acceleration: {x: 0, y: 0.5}
+        , velocity: {x: 2, y: 5}
       }
       
       //an object for player one (left paddle)
@@ -90,16 +89,13 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
           
         // Update the y location.
-        ball.velocity.y += ball.acceleration.y;
-        ball.position.x += ball.velocity.x;
+		ball.position.x += ball.velocity.x;
         ball.position.y += ball.velocity.y;
 		
-		
-	// Keep the animation going while the ball has not touched the canvas bottom.
-    if ((ball.position.x >= canvas.width - ball.radius) ||  (ball.position.x <= ball.radius))
-          ball.velocity.x = -ball.velocity.x;
-          
-	if ((ball.position.y >= canvas.height - ball.radius) ||  (ball.position.y <= ball.radius))
+		// Keep the animation going while the ball has not touched the canvas bottom.
+        if ((ball.position.x >= canvas.width - ball.radius) ||  (ball.position.x <= ball.radius))
+          ball.velocity.x = -ball.velocity.x;    
+		if ((ball.position.y >= canvas.height - ball.radius) ||  (ball.position.y <= ball.radius))
           ball.velocity.y = -ball.velocity.y;
         
         draw();//calls the method to draw obljects to the screen.
