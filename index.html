@@ -72,21 +72,22 @@
         
        //lets the user use the up and down arrowns to move the bottom paddle.
         //also lets the user use the q and w keys to left up and right.
-       if (event.keyCode == 39 && bottomPaddle.position.x < canvas.width - bottomPaddle.width || event.keyCode == 81 && bottomPaddle.position.x < canvas.width              - bottomPaddle.width)//lets the user use the arrow keys to control the paddle. Also makes sure the paddle stays within the canvas.
+       if (event.keyCode == 39 && bottomPaddle.position.x < canvas.width - bottomPaddle.width || event.keyCode == 87 && bottomPaddle.position.x < canvas.width              - bottomPaddle.width)//lets the player use the arrow keys to control the paddle. Also makes sure the paddle stays within the canvas.
+                                //Lets the player use the "q" key to move right and the "w" key to move left
            
           bottomPaddle.position.x += 15;
        
-        else if (event.keyCode == 37 && bottomPaddle.position.x + bottomPaddle.width > bottomPaddle.width || event.keyCode == 87 && bottomPaddle.position.x +                   player1.width > bottomPaddle.width )
+        else if (event.keyCode == 37 && bottomPaddle.position.x + bottomPaddle.width > bottomPaddle.width || event.keyCode == 81 && bottomPaddle.position.x + bottomPaddle.width > bottomPaddle.width)
             
           bottomPaddle.position.x -= 15;
             
             
             //Lets the user control the top paddle
-               if (event.keyCode == 39 && topPaddle.position.x < canvas.width - topPaddle.width || event.keyCode == 81 && topPaddle.position.x < canvas.width                       - topPaddle.width )
+               if (event.keyCode == 39 && topPaddle.position.x < canvas.width - topPaddle.width || event.keyCode == 80 && topPaddle.position.x < canvas.width                       - topPaddle.width )//lets a second player control the top paddle by pressing "o" to move left and "p" to move right.
                    
           topPaddle.position.x += 15;
        
-        else if (event.keyCode == 37 && topPaddle.position.x + topPaddle.width > topPaddle.width || event.keyCode == 87 && topPaddle.position.x +                               topPaddle.width > topPaddle.width )
+        else if (event.keyCode == 37 && topPaddle.position.x + topPaddle.width > topPaddle.width || event.keyCode == 79 && topPaddle.position.x +                               topPaddle.width > topPaddle.width )
             
           topPaddle.position.x -= 15;
       });//end addEventListener
