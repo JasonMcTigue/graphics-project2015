@@ -19,8 +19,7 @@
       var canvas = document.getElementById("gamecanvas");
       // Get a 2D context for the canvas.
       var ctx = canvas.getContext("2d");  
-        
-        
+
         // An object for the ball.
       var ball = {
         position: {x: 200, y: 10}
@@ -41,6 +40,8 @@
         , width: 95
         , length: 10
       }
+      
+      var score = 0;
       
        function draw() {
            
@@ -63,6 +64,26 @@
         ctx.fill();
            
       }//end draw()
+        
+        function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
+}
+         
+        function endGame()
+		{
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "#0095DD";
+			ctx.font = "16px Arial";
+			ctx.fillText("Game Over ", 500, 500);
+            ctx.fillText("Your Score is "+ score, 500, 550);
+            
+            if (event.keyCode == 13){
+                draw();
+            }
+		}
+        
         
          
       // Add an event listener to the keypress event.
@@ -93,31 +114,41 @@
       });//end addEventListener
         
         function collideWithBottomPaddle() {//function for handling the collisions for the bottom paddle
-			if (ball.position.x + ball.radius < bottomPaddle.position.x || ball.position.x - ball.radius > bottomPaddle.position.x + bottomPaddle.width)
-				return;//checks collision between the ball the the bottom paddle and makes sure that the ball will either hit the paddle or the canvas.
+			if (ball.position.x + ball.radius < bottomPaddle.position.x || ball.position.x - ball.radius > bottomPaddle.position.x + bottomPaddle.width){
+				return;
+            }//checks collision between the ball the the bottom paddle and makes sure that the ball will either hit the paddle or the canvas.
 			
-            else if (ball.position.y + ball.radius < bottomPaddle.position.y || ball.position.y - ball.radius > bottomPaddle.position.y + bottomPaddle.length)
-				return; //checks the y position
+            else if (ball.position.y + ball.radius < bottomPaddle.position.y || ball.position.y - ball.radius > bottomPaddle.position.y + bottomPaddle.length)              {  
+				return;
+            } //checks the y position
            
 			else{
 				ball.velocity.y = - ball.velocity.y;
+                score ++;
             }
             //console.log(player1.position.x);
          
 		}// End collideWithBottomPaddle();
         
         function collideWithTopPaddle() {//function for handling the collisions for the top paddle
-			if (ball.position.x + ball.radius < topPaddle.position.x || ball.position.x - ball.radius > topPaddle.position.x + topPaddle.width)
-				return;//checks collision between the ball the the paddle and makes sure that the ball will either the paddle or canvas for the second paddle
-			
-             else if (ball.position.y + ball.radius < topPaddle.position.y || ball.position.y - ball.radius > topPaddle.position.y + topPaddle.length)
+			if (ball.position.x + ball.radius < topPaddle.position.x || ball.position.x - ball.radius > topPaddle.position.x + topPaddle.width){
+                //stop.window.requestAnimationFrame(repeatme);
 				return;
+            }//checks collision between the ball the the paddle and makes sure that the ball will either the paddle or canvas for the second paddle
+			
+             else if (ball.position.y + ball.radius < topPaddle.position.y || ball.position.y - ball.radius > topPaddle.position.y + topPaddle.length){
+				    
+                 return;
+             }
 			
 			else{
 				ball.velocity.y = - ball.velocity.y;
+               score ++;
             }
          
 		} // End collideWithTopPaddle()
+       
+		
         
       // A function to repeat every time the animation loops.
       function repeatme() {
@@ -133,8 +164,26 @@
           ball.velocity.x = -ball.velocity.x;    
 		if ((ball.position.y >= canvas.height - ball.radius) ||  (ball.position.y <= ball.radius))
           ball.velocity.y = -ball.velocity.y;
+          
+
+
+                //  if(score == '100')
+         //{
+           // alert('win');
+             //endGame();
+        //}       
+          
+        if(ball.position.y  > bottomPaddle.position.y){	
+            endGame();
+            return;
+          }
+          //else if(ball.position.y > topPaddle.position.y){
+            //endGame();
+            //  return;
+          //}
         
         draw();//calls the function to draw obljects to the screen.
+        drawScore();
         collideWithBottomPaddle();//calls the collide function
         collideWithTopPaddle();//calls the collide fucntion for the second paddle
           
