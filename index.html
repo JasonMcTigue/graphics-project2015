@@ -27,21 +27,21 @@
         , velocity: {x: 3, y: 2}
       }
       
-      //an object for player one (left paddle)
+      //an object for player one (bottom paddle)
       var bottomPaddle = {
         position: {x: 500, y: 590}
         , width: 95
         , length: 10
       }
       
-      //an object for player two (right paddle)
+      //an object for player two (top paddle)
       var topPaddle = {
-        position: {x: 600, y: 10}
+        position: {x: 500, y: 10}
         , width: 95
         , length: 10
       }
       
-      var score = 0;
+      var score = 0; // variable to keep track of the score
       
        function draw() {
            
@@ -65,12 +65,14 @@
            
       }//end draw()
         
+        //function that draws the score in the top left hand corner of the screen.
         function drawScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: "+score, 8, 20);
-}
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText("Score: "+score, 8, 20);
+        }
          
+        //brings up the game over screen
         function endGame()
 		{
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -84,10 +86,22 @@
             }
 		}
         
+        function winGame()
+		{
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "#0095DD";
+			ctx.font = "16px Arial";
+			ctx.fillText("YOU WIN ", 500, 500);
+            ctx.fillText("Your Score is "+ score, 500, 550);
+            
+            if (event.keyCode == 13){
+                draw();
+            }
+		}
+        
         
          
       // Add an event listener to the keypress event.
-     
         window.addEventListener("keydown", function(event) { 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         
@@ -111,6 +125,11 @@
         else if (event.keyCode == 37 && topPaddle.position.x + topPaddle.width > topPaddle.width || event.keyCode == 79 && topPaddle.position.x +                               topPaddle.width > topPaddle.width )
             
           topPaddle.position.x -= 15;
+            
+            if (event.keyCode == 13){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+            }
       });//end addEventListener
         
         function collideWithBottomPaddle() {//function for handling the collisions for the bottom paddle
@@ -124,7 +143,7 @@
            
 			else{
 				ball.velocity.y = - ball.velocity.y;
-                score ++;
+                score ++; //adds one point to the score everytime the ball hits the bottom paddle
             }
             //console.log(player1.position.x);
          
@@ -143,7 +162,7 @@
 			
 			else{
 				ball.velocity.y = - ball.velocity.y;
-               score ++;
+               score ++;// adds one point to the score everytime the ball hits the top paddle
             }
          
 		} // End collideWithTopPaddle()
@@ -167,13 +186,13 @@
           
 
 
-                //  if(score == '100')
-         //{
-           // alert('win');
-             //endGame();
-        //}       
+                  if(score == '5')
+         {
+            alert('win');
+             winGame();
+        }       
           
-        if(ball.position.y  > bottomPaddle.position.y){	
+        if(ball.position.y  > bottomPaddle.position.y || ball.position.y < topPaddle.position.y){	
             endGame();
             return;
           }
@@ -183,7 +202,7 @@
           //}
         
         draw();//calls the function to draw obljects to the screen.
-        drawScore();
+        drawScore();//draws the score on the screen
         collideWithBottomPaddle();//calls the collide function
         collideWithTopPaddle();//calls the collide fucntion for the second paddle
           
