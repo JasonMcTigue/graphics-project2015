@@ -14,8 +14,6 @@
   <body>
     
      <canvas id="gamecanvas" width="1000px" height="600px"></canvas>
-       
-     
 
     <script type="text/javascript">
       // Gets a handle to the element with id gamecanvas.
@@ -48,18 +46,14 @@
       
   
       var point = 0; // variable to keep track of the score
-      
+        //setInterval(repeatme(),1);
+    
         //function to draw the ball at a random x coordinate everytime the game is started
           while (ball.position.x < 50){
             ball.position.x = Math.floor((Math.random() * 590 +1));
         }
         
-        //while (ball.position.y < 350){
-          //  ball.position.y = Math.floor((Math.random() * 590 +1));
-        
-    //    }
-        
-        
+     
        function draw() {
            
         //Draws bottom paddle and sets the colour and position
@@ -75,7 +69,7 @@
         ctx.fill();
         
         //Draws the ball
-        ctx.fillStyle = "rgb(255, 0, 0)";//sets paddle to green
+        ctx.fillStyle = "rgb(255, 0, 0)";//sets ball to red
         ctx.beginPath();
         ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
         ctx.fill();
@@ -118,7 +112,19 @@
          }
         
         }
-          
+         
+        
+        function startScreen(){
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "#FFFF00";
+			ctx.font = "40px Hiragino Kaku Gothic Std";
+			ctx.fillText("Game Over ", 300, 100);
+        
+        window.requestAnimationFrame(startScreen);
+        }
+        
+        
         //brings up the game over screen
         function endGame()
 		{
@@ -138,8 +144,11 @@
             ctx.fillText("You Scored "+ point +" points", 300, 150);
             }
             
-            //if (event.keyCode == 13){
-            //}
+            
+              
+            window.requestAnimationFrame(endGame);
+            
+          
 		}
         
         function winGame()
@@ -222,7 +231,7 @@
          
 		} // End collideWithTopPaddle()
        
-		
+
         
       // A function to repeat every time the animation loops.
       function repeatme() {
@@ -240,28 +249,24 @@
           ball.velocity.y = -ball.velocity.y;
           
 
-
+        //if 15 points are scored the user has won and the game ends
         if(point == '15')
          {
             //alert('win');
-             winGame();
+             winGame();//calls the method to bring up the winning screen.
         }       
           
+        //if the ball goes past either paddle then the game will end. 
         if(ball.position.y  > bottomPaddle.position.y || ball.position.y < topPaddle.position.y){	
             endGame();
             return;
           }
-          //else if(ball.position.y > topPaddle.position.y){
-            //endGame();
-            //  return;
-          //}
-        //drawImage();
         draw();//calls the function to draw obljects to the screen.
         drawScore();//draws the score on the screen
-        updateSpeed();
-        
+        updateSpeed();//updates the score each time a certain score is reached.
         collideWithBottomPaddle();//calls the collide function
         collideWithTopPaddle();//calls the collide fucntion for the second paddle
+          
           
         window.requestAnimationFrame(repeatme);
       }//end function repeatme();
