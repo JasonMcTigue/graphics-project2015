@@ -6,15 +6,17 @@
       
     <style type="text/css">
       canvas {
-        border: 3px solid blue;
-        background-image: url(background-image.jpg);
+        border: 3px solid blue; 
+        background-image: url(background-image1.jpg);
       }
       </style>
   </head>
   <body>
-      
+    
      <canvas id="gamecanvas" width="1000px" height="600px"></canvas>
        
+     
+
     <script type="text/javascript">
       // Gets a handle to the element with id gamecanvas.
       var canvas = document.getElementById("gamecanvas");
@@ -43,6 +45,8 @@
       }
       
  
+        
+      
       var score = 0; // variable to keep track of the score
       
        function draw() {
@@ -62,7 +66,7 @@
         //Draws the ball
         ctx.fillStyle = "rgb(0, 255, 0)";//sets paddle to green
         ctx.beginPath();
-        ctx.arc(ball.position.x.math.random, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
+        ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
         ctx.fill();
            
       }//end draw()
