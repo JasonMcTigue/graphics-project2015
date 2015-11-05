@@ -25,9 +25,11 @@
 
         // An object for the ball.
       var ball = {
-        position: {x: 200, y: 10}
+        position: {x: 9, y: 200}
         , radius: 8
         , velocity: {x: 3, y: 2}
+          , acceleration: {x: 3, y: 0.5}
+          
       }
       
       //an object for player one (bottom paddle)
@@ -46,25 +48,26 @@
       
  
         
+      var point = 0; // variable to keep track of the score
       
-      var score = 0; // variable to keep track of the score
-      
+        //function to draw the ball at a random x coordinate everytime the game is started
+        
        function draw() {
            
         //Draws bottom paddle and sets the colour and position
-        ctx.fillStyle = "rgb(255, 0, 0)";//sets paddle to red
+        ctx.fillStyle = "rgba(0, 204, 0,0.7)";//sets paddle to red
         ctx.beginPath();
         ctx.rect(bottomPaddle.position.x, bottomPaddle.position.y,bottomPaddle.width,bottomPaddle.length);//draws rectangle at given coords
         ctx.fill();
           
         //Draws top paddle and sets the colour and position
-        ctx.fillStyle = "rgb(0, 0, 255)";//sets paddle to blue
+        ctx.fillStyle = "rgba(255, 255, 0,0.7)";//sets paddle to blue
         ctx.beginPath();
         ctx.rect(topPaddle.position.x, topPaddle.position.y,topPaddle.width,topPaddle.length);//draws rectangle at given coords
         ctx.fill();
         
         //Draws the ball
-        ctx.fillStyle = "rgb(0, 255, 0)";//sets paddle to green
+        ctx.fillStyle = "rgb(255, 0, 0)";//sets paddle to green
         ctx.beginPath();
         ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
         ctx.fill();
@@ -73,35 +76,54 @@
         
         //function that draws the score in the top left hand corner of the screen.
         function drawScore() {
-            ctx.font = "16px Arial";
+            ctx.font = "16px Hiragino Kaku Gothic Std";
             ctx.fillStyle = "#0095DD";
-            ctx.fillText("Score: "+score, 8, 20);
+            
+            if(point == 0){
+                ctx.fillText("Points: "+point, 8, 20);
+            }
+            if(point == 1){
+            ctx.fillText("Point: "+point, 8, 20);
+            }
+            else if (point >= 2){
+            ctx.fillText("Points: "+point, 8, 20);
+            }
         }
          
         //brings up the game over screen
         function endGame()
 		{
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.fillStyle = "#0095DD";
-			ctx.font = "16px Arial";
-			ctx.fillText("Game Over ", 500, 500);
-            ctx.fillText("Your Score is "+ score, 500, 550);
+			ctx.fillStyle = "#FFFF00";
+			ctx.font = "40px Hiragino Kaku Gothic Std";
+			ctx.fillText("Game Over ", 300, 100);
             
-            if (event.keyCode == 13){
-                draw();
+            
+            if (point <=0){
+                ctx.fillText("You Scored "+ point +" points", 300, 150);
             }
+            if(point == 1){
+            ctx.fillText("You Scored "+ point +" point", 300, 150);
+            }
+            else{
+            ctx.fillText("You Scored "+ point +" points", 300, 150);
+            }
+            
+            //if (event.keyCode == 13){
+            //}
 		}
+        
         
         function winGame()
 		{
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.fillStyle = "#0095DD";
+			ctx.fillStyle = "#01DF01";
 			ctx.font = "16px Arial";
-			ctx.fillText("YOU WIN ", 500, 500);
-            ctx.fillText("Your Score is "+ score, 500, 550);
+			ctx.fillText("YOU WIN ", 450, 350);
+            ctx.fillText("Your Score is "+ point, 500, 550);
             
             if (event.keyCode == 13){
-                draw();
+        window.requestAnimationFrame(repeatme);
             }
 		}
         
@@ -149,7 +171,7 @@
            
 			else{
 				ball.velocity.y = - ball.velocity.y;
-                score ++; //adds one point to the score everytime the ball hits the bottom paddle
+                point ++; //adds one point to the score everytime the ball hits the bottom paddle
             }
             //console.log(player1.position.x);
          
@@ -168,7 +190,7 @@
 			
 			else{
 				ball.velocity.y = - ball.velocity.y;
-               score ++;// adds one point to the score everytime the ball hits the top paddle
+               point ++;// adds one point to the score everytime the ball hits the top paddle
             }
          
 		} // End collideWithTopPaddle()
@@ -192,9 +214,9 @@
           
 
 
-                  if(score == '10')
+                  if(point == '10')
          {
-            alert('win');
+            //alert('win');
              winGame();
         }       
           
