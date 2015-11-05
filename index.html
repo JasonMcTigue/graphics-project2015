@@ -7,7 +7,7 @@
     <style type="text/css">
       canvas {
         border: 3px solid blue; 
-        background-image: url(background-image1.jpg);
+        background-image: url(space-background.jpg);
       }
       </style>
   </head>
@@ -46,7 +46,7 @@
       var topPaddle = {
         position: {x: 500, y: 10}
         , width: 95
-        , length: 10
+        , length: 5
       }
       
       
@@ -221,7 +221,7 @@
         //===============================Collision Functions===============================
         function collideWithBottomPaddle() {//function for handling the collisions for the bottom paddle
 			if (ball.position.x + ball.radius < bottomPaddle.position.x -bottomPaddle.width|| ball.position.x - ball.radius > bottomPaddle.position.x +
-                bottomPaddle.width){
+            bottomPaddle.width){
 				return;
             }//checks collision between the ball the the bottom paddle and makes sure that the ball will either hit the paddle or the canvas.
 			
@@ -270,7 +270,7 @@
           
 
         //if 15 points are scored the user has won and the game ends
-        if(point == 1){
+        if(point == 15){
              winGame();//calls the method to bring up the winning screen.
              return;
         }       
