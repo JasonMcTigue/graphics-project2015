@@ -96,36 +96,58 @@
         //updates the speed of the ball everytime a certain score is reached.
         function updateSpeed(){
             if(point == 2){
+        ctx.fillStyle = "rgb(0, 255, 0)";//sets ball to red
+        ctx.beginPath();
+        ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
+        ctx.fill();
+           
             ball.velocity.y = 3;
          }
         
         else if(point == 4){
+            
+            ctx.fillStyle = "rgb(0, 255, 0)";//sets ball to red
+        ctx.beginPath();
+        ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
+        ctx.fill();
             ball.velocity.y = 4;
          }
         
-        else if(point == 6){
+        else if(point == 8){
+            
+        ctx.fillStyle = "rgb(0, 255, 0)";//sets ball to red
+        ctx.beginPath();
+        ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
+        ctx.fill();
+            
             ball.velocity.y = 5;
          }
             
-            else if(point == 11){
+            else if(point == 12){
+                
+        ctx.fillStyle = "rgb(0, 255, 0)";//sets ball to red
+        ctx.beginPath();
+        ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
+        ctx.fill();
             ball.velocity.y = 6;
          }
         
         }
-         
+          
+           //brings up the game over screen
         
-        function startScreen(){
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function winGame()
+		{
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = "#FFFF00";
 			ctx.font = "40px Hiragino Kaku Gothic Std";
-			ctx.fillText("Game Over ", 300, 100);
+			ctx.fillText("YOU WIN! ", 300, 100);
+            ctx.fillText("Your Score is "+ point, 300, 150);
+            
+        window.requestAnimationFrame(winGame);
+            
+		}
         
-        window.requestAnimationFrame(startScreen);
-        }
-        
-        
-        //brings up the game over screen
         function endGame()
 		{
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -143,26 +165,11 @@
             else{
             ctx.fillText("You Scored "+ point +" points", 300, 150);
             }
-            
-            
               
             window.requestAnimationFrame(endGame);
-            
-          
 		}
         
-        function winGame()
-		{
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.fillStyle = "#01DF01";
-			ctx.font = "16px Arial";
-			ctx.fillText("YOU WIN ", 450, 350);
-            ctx.fillText("Your Score is "+ point, 500, 550);
-            
-            if (event.keyCode == 13){
-        window.requestAnimationFrame(repeatme);
-            }
-		}
+      
         
         
       // Add an event listener to the keypress event.
@@ -250,7 +257,7 @@
           
 
         //if 15 points are scored the user has won and the game ends
-        if(point == '15')
+        if(point == 2)
          {
             //alert('win');
              winGame();//calls the method to bring up the winning screen.
