@@ -148,8 +148,9 @@
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = "#FFFF00";
 			ctx.font = "40px Hiragino Kaku Gothic Std";
-			ctx.fillText("YOU WIN! ", 300, 100);
+			ctx.fillText("YOU WIN! ", 350, 100);
             ctx.fillText("Your Score is "+ point, 300, 150);
+            ctx.fillText("Press F5 or Command r to play again ", 100, 200);
             
             window.requestAnimationFrame(winGame);
 		}// End winGame()
@@ -160,7 +161,7 @@
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = "#FFFF00";
 			ctx.font = "40px Hiragino Kaku Gothic Std";
-			ctx.fillText("Game Over ", 300, 100);
+			ctx.fillText("Game Over ", 400, 100);
             
             //If statements to properly display the points scored
             if (point <=0){
@@ -172,6 +173,8 @@
             else{
             ctx.fillText("You Scored "+ point +" points", 300, 150);
             }
+            
+            ctx.fillText("Press F5 or Command r to play again ", 100, 200);
               
             window.requestAnimationFrame(endGame);
 		}//End endGame();
@@ -267,7 +270,7 @@
           
 
         //if 15 points are scored the user has won and the game ends
-        if(point == 15){
+        if(point == 1){
              winGame();//calls the method to bring up the winning screen.
              return;
         }       
