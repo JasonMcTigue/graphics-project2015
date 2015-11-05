@@ -6,14 +6,15 @@
       
     <style type="text/css">
       canvas {
-        border: 3px solid black;
+        border: 3px solid blue;
+        background-image: url(background-image.jpg);
       }
       </style>
   </head>
   <body>
-    
+      
      <canvas id="gamecanvas" width="1000px" height="600px"></canvas>
-
+       
     <script type="text/javascript">
       // Gets a handle to the element with id gamecanvas.
       var canvas = document.getElementById("gamecanvas");
@@ -41,6 +42,7 @@
         , length: 10
       }
       
+ 
       var score = 0; // variable to keep track of the score
       
        function draw() {
@@ -60,7 +62,7 @@
         //Draws the ball
         ctx.fillStyle = "rgb(0, 255, 0)";//sets paddle to green
         ctx.beginPath();
-        ctx.arc(ball.position.x, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
+        ctx.arc(ball.position.x.math.random, ball.position.y, ball.radius, 0, 2 * Math.PI);//draws circle at given coords
         ctx.fill();
            
       }//end draw()
@@ -107,24 +109,24 @@
         
        //lets the user use the up and down arrowns to move the bottom paddle.
         //also lets the user use the q and w keys to left up and right.
-       if (event.keyCode == 39 && bottomPaddle.position.x < canvas.width - bottomPaddle.width || event.keyCode == 87 && bottomPaddle.position.x < canvas.width              - bottomPaddle.width)//lets the player use the arrow keys to control the paddle. Also makes sure the paddle stays within the canvas.
+       if (event.keyCode == 39 && bottomPaddle.position.x < canvas.width - bottomPaddle.width || event.keyCode == 87 && bottomPaddle.position.x < canvas.width - bottomPaddle.width)//lets the player use the arrow keys to control the paddle. Also makes sure the paddle stays within the canvas.
                                 //Lets the player use the "q" key to move right and the "w" key to move left
            
-          bottomPaddle.position.x += 15;
+          bottomPaddle.position.x += 30;
        
         else if (event.keyCode == 37 && bottomPaddle.position.x + bottomPaddle.width > bottomPaddle.width || event.keyCode == 81 && bottomPaddle.position.x + bottomPaddle.width > bottomPaddle.width)
             
-          bottomPaddle.position.x -= 15;
+          bottomPaddle.position.x -= 30;
             
             
             //Lets the user control the top paddle
-               if (event.keyCode == 39 && topPaddle.position.x < canvas.width - topPaddle.width || event.keyCode == 80 && topPaddle.position.x < canvas.width                       - topPaddle.width )//lets a second player control the top paddle by pressing "o" to move left and "p" to move right.
+               if (event.keyCode == 39 && topPaddle.position.x < canvas.width - topPaddle.width || event.keyCode == 80 && topPaddle.position.x < canvas.width - topPaddle.width )//lets a second player control the top paddle by pressing "o" to move left and "p" to move right.
                    
-          topPaddle.position.x += 15;
+          topPaddle.position.x += 30;
        
-        else if (event.keyCode == 37 && topPaddle.position.x + topPaddle.width > topPaddle.width || event.keyCode == 79 && topPaddle.position.x +                               topPaddle.width > topPaddle.width )
+        else if (event.keyCode == 37 && topPaddle.position.x + topPaddle.width > topPaddle.width || event.keyCode == 79 && topPaddle.position.x + topPaddle.width > topPaddle.width )
             
-          topPaddle.position.x -= 15;
+          topPaddle.position.x -= 30;
             
             if (event.keyCode == 13){
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -133,7 +135,7 @@
       });//end addEventListener
         
         function collideWithBottomPaddle() {//function for handling the collisions for the bottom paddle
-			if (ball.position.x + ball.radius < bottomPaddle.position.x || ball.position.x - ball.radius > bottomPaddle.position.x + bottomPaddle.width){
+			if (ball.position.x + ball.radius < bottomPaddle.position.x -bottomPaddle.width|| ball.position.x - ball.radius > bottomPaddle.position.x + bottomPaddle.width){
 				return;
             }//checks collision between the ball the the bottom paddle and makes sure that the ball will either hit the paddle or the canvas.
 			
@@ -200,9 +202,10 @@
             //endGame();
             //  return;
           //}
-        
+        //drawImage();
         draw();//calls the function to draw obljects to the screen.
         drawScore();//draws the score on the screen
+        
         collideWithBottomPaddle();//calls the collide function
         collideWithTopPaddle();//calls the collide fucntion for the second paddle
           
